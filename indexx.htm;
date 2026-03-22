@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鲁以文 - 个人主页 | 司法会计</title>
+    <style>
+        /* 全局变量与基础重置 */
+        :root {
+            --primary-color: #1A365D; /* 深藏青色，代表严谨法务 */
+            --secondary-color: #D69E2E; /* 雅金色，代表专业财富 */
+            --bg-color: #F7FAFC;
+            --text-color: #2D3748;
+            --text-light: #718096;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* 页面主体容器 */
+        .container {
+            max-width: 900px;
+            margin: 80px auto 40px; /* 避开固定导航栏 */
+            padding: 0 20px;
+        }
+
+        /* 模块基础样式 */
+        section {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-top: 4px solid transparent;
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: translateY(-2px);
+        }
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #EDF2F7;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        /* 首屏简介 (Hero Section) */
+        .hero {
+            text-align: center;
+            border-top: 4px solid var(--primary-color);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            text-indent: 2em;
+        }
+
+        /* 技能列表 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .skill-item {
+            background: #F7FAFC;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        .skill-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* 项目展示 */
+        .project-item {
+            margin-bottom: 25px;
+        }
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+        .project-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        .project-role {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            background: #FFF5F5;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        .project-desc ul {
+            padding-left: 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .project-desc li {
+            margin-bottom: 5px;
+        }
+
+        /* 联系方式 */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+        .contact-label {
+            font-weight: bold;
+            color: var(--primary-color);
+            width: 80px;
+        }
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .container {
+                margin-top: 100px; /* 移动端导航栏较高 */
+            }
+            .project-header {
+                flex-direction: column;
+            }
+            .project-role {
+                margin-top: 5px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航栏 -->
+    <header>
+        <nav>
+            <div class="logo">鲁以文 | 个人主页</div>
+            <div class="nav-links">
+                <a href="#about">简介</a>
+                <a href="#skills">技能</a>
+                <a href="#projects">项目</a>
+                <a href="#contact">联系</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主体内容 -->
+    <div class="container">
+        
+        <!-- 个人简介模块 -->
+        <section id="about" class="hero">
+            <h1>鲁以文</h1>
+            <div class="subtitle">司法会计（本科） | 数据与真相的追寻者</div>
+            <p>您好！我是鲁以文，一名专注于司法会计领域的本科毕业生。在学习过程中，我系统掌握了法学、会计学与审计学的核心交叉知识，致力于运用严谨的审计思维、财务分析技术与证据规则来识别经济异常与财务舞弊。我具备扎实的财务数据处理能力与敏锐的逻辑洞察力，善于从海量财务记录中追踪资金流向并提炼关键的数字证据。期待能够在法务会计、合规风控或经济犯罪调查等领域，为您团队提供专业的数据分析与诉讼支持。</p>
+        </section>
+
+        <!-- 技能列表模块 -->
+        <section id="skills">
+            <h2>核心技能</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <span class="skill-title">财务与审计分析</span>
+                    精通全盘账务处理与财务报表分析；擅长利用审计技术检查财务差异与异常模式。
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">法律与合规思维</span>
+                    熟悉经济法、商法等相关法规及证据规则；具备较强的法务证据收集与尽调技术。
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">数据处理工具</span>
+                    熟练使用 Excel 高级功能、用友/金蝶财务软件，了解基础 Python 数据清洗，具备大数据分析思维。
+                </div>
+                <div class="skill-item">
+                    <span class="skill-title">综合素养</span>
+                    出色的逻辑推理与批判性思考能力；具备优秀的口头表达、商业写作与团队跨部门沟通技巧。
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目展示模块 -->
+        <section id="projects">
+            <h2>项目展示</h2>
+            
+            <div class="project-item">
+                <div class="project-header">
+                    <span class="project-title">某企业财务舞弊风险评估与调查演练</span>
+                    <span class="project-role">核心分析师 | 课程核心项目</span>
+                </div>
+                <div class="project-desc">
+                    <ul>
+                        <li>收集并分析目标公司连续三年的财务报表及相关会计凭证，运用比率分析法识别出异常的资金周转与关联交易。</li>
+                        <li>通过交叉比对非财务信息（如采购合同与仓储记录），追查出虚增收入的舞弊线索。</li>
+                        <li>撰写《财务异常分析与法务调查报告》，模拟为法庭提供具备法律效力的书面证据支持，获得专业导师高度评价。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <span class="project-title">区域中小企业内控合规审计实训</span>
+                    <span class="project-role">组长 | 暑期实训</span>
+                </div>
+                <div class="project-desc">
+                    <ul>
+                        <li>带队为3家模拟型中小企业进行内控测试，审查现金流与报销审批流程。</li>
+                        <li>发现并指出4处财务流程中的合规漏洞，设计了针对性的防范欺诈控制方案，有效提升了企业的风险防范能力。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式模块 -->
+        <section id="contact">
+            <h2>联系方式</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-label">电子邮箱：</span>
+                    <a href="mailto:luyiwen.forensic@example.com">luyiwen.forensic@example.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">联系电话：</span>
+                    <span>(+86) 138-XXXX-XXXX</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">所在城市：</span>
+                    <span>中国，具体城市可补充</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">GitHub：</span>
+                    <a href="#" target="_blank">github.com/luyiwen</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
