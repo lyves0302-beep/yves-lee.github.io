@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>个人主页 | Personal Homepage</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: flex-end;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+    #lang-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 7px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    #lang-btn:hover { background: #1d4ed8; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: #fff;
+      padding: 60px 24px 50px;
+      text-align: center;
+    }
+    .avatar {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px;
+    }
+    .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .hero .subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 12px;
+    }
+    .hero .tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px;
+    }
+    .contact-links { display: flex; gap: 14px; justify-content: center; }
+    .contact-links a {
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255,255,255,0.18);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+    .contact-links a:hover { background: rgba(255,255,255,0.35); }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 860px;
+      margin: 36px auto;
+      padding: 0 20px;
+      display: grid;
+      gap: 24px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+    }
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card p { color: var(--text); font-size: 0.97rem; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .skill-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .edu-item .edu-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; flex-wrap: wrap; gap: 4px;
+    }
+    .edu-item .school { font-weight: 700; font-size: 0.97rem; }
+    .edu-item .period {
+      font-size: 13px; color: var(--muted);
+      background: var(--bg);
+      padding: 2px 10px; border-radius: 10px;
+    }
+    .edu-item .degree { font-size: 0.92rem; color: var(--muted); margin-top: 4px; }
+    .edu-item .courses {
+      margin-top: 8px;
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .course-tag {
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer strong { color: var(--primary); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 540px) {
+      .hero h1 { font-size: 1.5rem; }
+      .card { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <button id="lang-btn" onclick="toggleLang()">🌐 English</button>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="avatar">👤</div>
+  <h1 id="name">鲁旖文</h1>
+  <div class="subtitle" id="subtitle">
+    华东政法大学 · 司法会计
+  </div>
+  <div class="tags">
+    <span class="tag" id="tag1">📊 数据分析</span>
+    <span class="tag" id="tag2">🔬 会计学</span>
+    <span class="tag" id="tag3">💡 审计学</span>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:【你的邮箱】">📧 lywlywhhh@qq.com</a>
+    <a href="https://github.com/【你的GitHub用户名】" target="_blank">🐙 GitHub</a>
+  </div>
+</section>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- ABOUT -->
+  <div class="card">
+    <h2><span>📝</span> <span id="about-title">个人简介</span></h2>
+    <p id="about-text">
+      我是华东政法大学司法会计专业的在读学生，
+      专注于XXX领域的研究。我擅长利用数据分析方法解决实际问题，
+      具备扎实的统计学基础和编程能力。我对数据分析研究方向充满热情，
+      希望在学术和职业发展中持续深耕。
+    </p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="card">
+    <h2><span>🛠️</span> <span id="skills-title">专业技能</span></h2>
+    <div class="skills-grid" id="skills-container">
+      <!-- 在此添加或删除技能标签 -->
+      <span class="skill-badge">Python</span>
+      <span class="skill-badge">R</span>
+      <span class="skill-badge">数据分析</span>
+      <span class="skill-badge">计量经济学</span>
+      <span class="skill-badge">统计建模</span>
+      <span class="skill-badge">学术写作</span>
+      <span class="skill-badge">Excel / SPSS</span>
+      <span class="skill-badge">文献综述</span>
+      <span class="skill-badge">国际金融</span>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="card">
+    <h2><span>🎓</span> <span id="edu-title">教育经历</span></h2>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="school" id="school1">华东政法大学</span>
+        <span class="period">2022.09 – 至今</span>
+      </div>
+      <div class="degree" id="degree1">管理学学士 · 司法会计</div>
+      <div class="courses">
+        <span class="course-tag">计量经济学</span>
+        <span class="course-tag">统计学</span>
+        <span class="course-tag">数据挖掘</span>
+        <span class="course-tag">机器学习</span>
+        <span class="course-tag">审计学</span>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="school" id="school2">清华附中</span>
+        <span class="period">2019.09 – 2022.06</span>
+      </div>
+      <div class="degree" id="degree2">注册会计师</div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span id="footer-text">最后更新：</span>
+  <strong id="last-updated"></strong>
+</footer>
+
+<!-- ── LANGUAGE SCRIPT ── -->
+<script>
+  // ─── Auto last-updated date ───
+  const d = new Date();
+  document.getElementById('last-updated').textContent =
+    d.getFullYear() + '.' +
+    String(d.getMonth()+1).padStart(2,'0') + '.' +
+    String(d.getDate()).padStart(2,'0');
+
+  // ─── Bilingual content ───
+  const content = {
+    zh: {
+      btnLabel:    '🌐 English',
+      name:        '【你的中文姓名】',
+      subtitle:    '【学校名称】 · 【专业名称】',
+      tag1: '📊 数据分析', tag2: '🔬 【研究方向1】', tag3: '💡 【研究方向2】',
+      aboutTitle:  '个人简介',
+      aboutText:   '【在此处写中文个人简介，2–4句话。介绍你的背景、研究兴趣和目标。】',
+      skillsTitle: '专业技能',
+      eduTitle:    '教育经历',
+      school1:     '【大学名称】',
+      degree1:     '【学位】 · 【专业】',
+      school2:     '【高中名称】',
+      degree2:     '【学位或证书】',
+      footerText:  '最后更新：',
+    },
+    en: {
+      btnLabel:    '🌐 中文',
+      name:        '【Your English Name】',
+      subtitle:    '【University】 · 【Major】',
+      tag1: '📊 Data Analysis', tag2: '🔬 【Research Area 1】', tag3: '💡 【Research Area 2】',
+      aboutTitle:  'About Me',
+      aboutText:   '【Write 2–4 sentences in English. E.g., I am a student at XX University majoring in XX. I specialize in data-driven research and have strong foundations in statistics and programming. I am passionate about XX and eager to contribute to academic and industry projects.】',
+      skillsTitle: 'Skills',
+      eduTitle:    'Education',
+      school1:     '【University Name】',
+      degree1:     '【Degree】 · 【Major】',
+      school2:     '【High School Name】',
+      degree2:     '【Degree or Certificate】',
+      footerText:  'Last updated: ',
+    }
+  };
+
+  let currentLang = 'zh';
+
+  function toggleLang() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    const c = content[currentLang];
+    document.getElementById('lang-btn').textContent   = c.btnLabel;
+    document.getElementById('name').textContent        = c.name;
+    document.getElementById('subtitle').textContent    = c.subtitle;
+    document.getElementById('tag1').textContent        = c.tag1;
+    document.getElementById('tag2').textContent        = c.tag2;
+    document.getElementById('tag3').textContent        = c.tag3;
+    document.getElementById('about-title').textContent = c.aboutTitle;
+    document.getElementById('about-text').textContent  = c.aboutText;
+    document.getElementById('skills-title').textContent= c.skillsTitle;
+    document.getElementById('edu-title').textContent   = c.eduTitle;
+    document.getElementById('school1').textContent     = c.school1;
+    document.getElementById('degree1').textContent     = c.degree1;
+    document.getElementById('school2').textContent     = c.school2;
+    document.getElementById('degree2').textContent     = c.degree2;
+    document.getElementById('footer-text').textContent = c.footerText;
+    document.documentElement.lang = currentLang;
+  }
+</script>
+</body>
+</html>
