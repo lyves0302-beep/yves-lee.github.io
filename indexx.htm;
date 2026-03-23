@@ -1,328 +1,411 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鲁以文 - 个人主页 | 司法会计</title>
-    <style>
-        /* 全局变量与基础重置 */
-        :root {
-            --primary-color: #1A365D; /* 深藏青色，代表严谨法务 */
-            --secondary-color: #D69E2E; /* 雅金色，代表专业财富 */
-            --bg-color: #F7FAFC;
-            --text-color: #2D3748;
-            --text-light: #718096;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>李毅丰 · 个人主页</title>
+  <style>
+    /* ========= 基础重置 & 字体 ========= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* 导航栏 */
-        header {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        nav {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-        .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
+    :root {
+      --bg:        #f5f5f7;
+      --surface:   #ffffff;
+      --border:    #d2d2d7;
+      --text-h:    #1d1d1f;
+      --text-b:    #3a3a3c;
+      --text-s:    #6e6e73;
+      --accent:    #4a6fa5;   /* 低饱和蓝 */
+      --accent-lt: #e8eef6;
+      --tag-bg:    #f0f0f2;
+      --radius:    14px;
+      --max-w:     820px;
+      --serif:     'Georgia', 'Noto Serif SC', serif;
+      --sans:      -apple-system, BlinkMacSystemFont, 'PingFang SC',
+                   'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+    }
 
-        /* 页面主体容器 */
-        .container {
-            max-width: 900px;
-            margin: 80px auto 40px; /* 避开固定导航栏 */
-            padding: 0 20px;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* 模块基础样式 */
-        section {
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border-top: 4px solid transparent;
-            transition: transform 0.3s;
-        }
-        section:hover {
-            transform: translateY(-2px);
-        }
-        h2 {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #EDF2F7;
-            position: relative;
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary-color);
-        }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-b);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* 首屏简介 (Hero Section) */
-        .hero {
-            text-align: center;
-            border-top: 4px solid var(--primary-color);
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        .hero .subtitle {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: left;
-            text-indent: 2em;
-        }
+    /* ========= 导航条 ========= */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,245,247,0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+    }
+    .nav-brand {
+      font-size: 15px; font-weight: 600;
+      color: var(--text-h); letter-spacing: .02em;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; color: var(--text-s);
+      text-decoration: none;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
 
-        /* 技能列表 */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        .skill-item {
-            background: #F7FAFC;
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid var(--secondary-color);
-        }
-        .skill-title {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            display: block;
-        }
+    /* ========= 页面容器 ========= */
+    .page { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
 
-        /* 项目展示 */
-        .project-item {
-            margin-bottom: 25px;
-        }
-        .project-item:last-child {
-            margin-bottom: 0;
-        }
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 10px;
-        }
-        .project-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-        }
-        .project-role {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            background: #FFF5F5;
-            padding: 2px 8px;
-            border-radius: 12px;
-        }
-        .project-desc ul {
-            padding-left: 20px;
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-        .project-desc li {
-            margin-bottom: 5px;
-        }
+    /* ========= Hero 区块 ========= */
+    .hero {
+      padding: 88px 0 64px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 52px;
+      flex-wrap: wrap;
+    }
+    .hero-avatar {
+      width: 108px; height: 108px; flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c9d4e8 0%, #dde4f0 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px; color: var(--accent);
+      box-shadow: 0 4px 24px rgba(74,111,165,.15);
+      user-select: none;
+    }
+    .hero-text {}
+    .hero-name {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 700; letter-spacing: -.02em;
+      color: var(--text-h);
+      font-family: var(--serif);
+    }
+    .hero-sub {
+      margin-top: 6px;
+      font-size: 15px; color: var(--text-s);
+      letter-spacing: .015em;
+    }
+    .hero-sub span { color: var(--accent); font-weight: 500; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 14px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: var(--accent-lt);
+      font-size: 12.5px; color: var(--accent);
+      letter-spacing: .03em; font-weight: 500;
+    }
+    .hero-badge::before { content: '◆'; font-size: 8px; }
 
-        /* 联系方式 */
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            font-size: 1rem;
-        }
-        .contact-label {
-            font-weight: bold;
-            color: var(--primary-color);
-            width: 80px;
-        }
-        .contact-item a {
-            color: var(--secondary-color);
-            text-decoration: none;
-        }
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
+    /* ========= 通用 Section ========= */
+    section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
 
-        /* 移动端适配 */
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .container {
-                margin-top: 100px; /* 移动端导航栏较高 */
-            }
-            .project-header {
-                flex-direction: column;
-            }
-            .project-role {
-                margin-top: 5px;
-                display: inline-block;
-            }
-        }
-    </style>
+    .section-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text-s); margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3.5vw, 28px);
+      font-weight: 700; color: var(--text-h);
+      letter-spacing: -.015em; margin-bottom: 20px;
+    }
+    .section-body {
+      font-size: 15.5px; color: var(--text-b);
+      line-height: 1.85; max-width: 680px;
+    }
+
+    /* ========= 关于我 ========= */
+    .about-quote {
+      margin: 24px 0 0;
+      padding-left: 20px;
+      border-left: 3px solid var(--accent);
+      font-style: italic; color: var(--text-s);
+      font-size: 14.5px; line-height: 1.8;
+    }
+
+    /* ========= 信息卡片网格 ========= */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px; margin-top: 12px;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .info-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,.08);
+      transform: translateY(-3px);
+    }
+    .info-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .info-card-label {
+      font-size: 11px; color: var(--text-s);
+      letter-spacing: .08em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 4px;
+    }
+    .info-card-value {
+      font-size: 14.5px; color: var(--text-h);
+      font-weight: 500; line-height: 1.5;
+    }
+
+    /* ========= 研究方向标签 ========= */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .tag {
+      padding: 7px 18px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      font-size: 13.5px; color: var(--text-b);
+      font-weight: 500;
+      transition: background .25s, color .25s, border-color .25s;
+      cursor: default;
+    }
+    .tag:hover {
+      background: var(--accent-lt);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ========= 技能条 ========= */
+    .skill-list { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .skill-item { display: flex; align-items: center; gap: 16px; }
+    .skill-name {
+      width: 120px; flex-shrink: 0;
+      font-size: 13.5px; font-weight: 600; color: var(--text-h);
+    }
+    .skill-bar-wrap {
+      flex: 1; height: 6px;
+      background: var(--tag-bg); border-radius: 3px; overflow: hidden;
+    }
+    .skill-bar {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, #7a9fd4 100%);
+      transform-origin: left;
+      animation: growBar .9s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes growBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    /* ========= 课程卡片 ========= */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 12px; margin-top: 12px;
+    }
+    .course-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 13.5px; color: var(--text-b);
+      font-weight: 500; text-align: center;
+      line-height: 1.5;
+      transition: box-shadow .3s, border-color .3s;
+    }
+    .course-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(74,111,165,.12);
+    }
+    .course-card .course-num {
+      display: block;
+      font-size: 11px; color: var(--text-s);
+      letter-spacing: .06em; margin-bottom: 6px;
+    }
+
+    /* ========= Footer ========= */
+    footer {
+      text-align: center;
+      padding: 36px 24px;
+      font-size: 12.5px; color: var(--text-s);
+      border-top: 1px solid var(--border);
+      letter-spacing: .03em;
+    }
+    footer a { color: var(--text-s); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ========= 滚动淡入动画 ========= */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========= 响应式 ========= */
+    @media (max-width: 600px) {
+      .hero { flex-direction: column; gap: 24px; padding: 60px 0 48px; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- 顶部导航栏 -->
-    <header>
-        <nav>
-            <div class="logo">鲁以文 | 个人主页</div>
-            <div class="nav-links">
-                <a href="#about">简介</a>
-                <a href="#skills">技能</a>
-                <a href="#projects">项目</a>
-                <a href="#contact">联系</a>
-            </div>
-        </nav>
-    </header>
+<!-- ===== 导航 ===== -->
+<nav>
+  <span class="nav-brand">李毅丰</span>
+  <ul class="nav-links">
+    <li><a href="#about">关于我</a></li>
+    <li><a href="#education">学术背景</a></li>
+    <li><a href="#research">研究方向</a></li>
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#courses">课程</a></li>
+  </ul>
+</nav>
 
-    <!-- 主体内容 -->
-    <div class="container">
-        
-        <!-- 个人简介模块 -->
-        <section id="about" class="hero">
-            <h1>鲁以文</h1>
-            <div class="subtitle">司法会计（本科） | 数据与真相的追寻者</div>
-            <p>您好！我是鲁以文，一名专注于司法会计领域的本科毕业生。在学习过程中，我系统掌握了法学、会计学与审计学的核心交叉知识，致力于运用严谨的审计思维、财务分析技术与证据规则来识别经济异常与财务舞弊。我具备扎实的财务数据处理能力与敏锐的逻辑洞察力，善于从海量财务记录中追踪资金流向并提炼关键的数字证据。期待能够在法务会计、合规风控或经济犯罪调查等领域，为您团队提供专业的数据分析与诉讼支持。</p>
-        </section>
+<main class="page">
 
-        <!-- 技能列表模块 -->
-        <section id="skills">
-            <h2>核心技能</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <span class="skill-title">财务与审计分析</span>
-                    精通全盘账务处理与财务报表分析；擅长利用审计技术检查财务差异与异常模式。
-                </div>
-                <div class="skill-item">
-                    <span class="skill-title">法律与合规思维</span>
-                    熟悉经济法、商法等相关法规及证据规则；具备较强的法务证据收集与尽调技术。
-                </div>
-                <div class="skill-item">
-                    <span class="skill-title">数据处理工具</span>
-                    熟练使用 Excel 高级功能、用友/金蝶财务软件，了解基础 Python 数据清洗，具备大数据分析思维。
-                </div>
-                <div class="skill-item">
-                    <span class="skill-title">综合素养</span>
-                    出色的逻辑推理与批判性思考能力；具备优秀的口头表达、商业写作与团队跨部门沟通技巧。
-                </div>
-            </div>
-        </section>
-
-        <!-- 项目展示模块 -->
-        <section id="projects">
-            <h2>项目展示</h2>
-            
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">某企业财务舞弊风险评估与调查演练</span>
-                    <span class="project-role">核心分析师 | 课程核心项目</span>
-                </div>
-                <div class="project-desc">
-                    <ul>
-                        <li>收集并分析目标公司连续三年的财务报表及相关会计凭证，运用比率分析法识别出异常的资金周转与关联交易。</li>
-                        <li>通过交叉比对非财务信息（如采购合同与仓储记录），追查出虚增收入的舞弊线索。</li>
-                        <li>撰写《财务异常分析与法务调查报告》，模拟为法庭提供具备法律效力的书面证据支持，获得专业导师高度评价。</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">区域中小企业内控合规审计实训</span>
-                    <span class="project-role">组长 | 暑期实训</span>
-                </div>
-                <div class="project-desc">
-                    <ul>
-                        <li>带队为3家模拟型中小企业进行内控测试，审查现金流与报销审批流程。</li>
-                        <li>发现并指出4处财务流程中的合规漏洞，设计了针对性的防范欺诈控制方案，有效提升了企业的风险防范能力。</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 联系方式模块 -->
-        <section id="contact">
-            <h2>联系方式</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span class="contact-label">电子邮箱：</span>
-                    <a href="mailto:luyiwen.forensic@example.com">luyiwen.forensic@example.com</a>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">联系电话：</span>
-                    <span>(+86) 138-XXXX-XXXX</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">所在城市：</span>
-                    <span>中国，具体城市可补充</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">GitHub：</span>
-                    <a href="#" target="_blank">github.com/luyiwen</a>
-                </div>
-            </div>
-        </section>
-
+  <!-- ===== Hero ===== -->
+  <div class="hero">
+    <div class="hero-avatar">李</div>
+    <div class="hero-text">
+      <h1 class="hero-name">李毅丰</h1>
+      <p class="hero-sub">
+        <span>华东政法大学</span> · 政府管理学院 · 政治学与行政学
+      </p>
+      <div class="hero-badge">法学学士在读</div>
     </div>
+  </div>
+
+  <!-- ===== 关于我 ===== -->
+  <section id="about" class="fade-up">
+    <p class="section-label">Personal Statement</p>
+    <h2 class="section-title">关于我</h2>
+    <p class="section-body">
+      我是李毅丰，就读于华东政法大学政府管理学院政治学与行政学专业，攻读法学学士学位。我长期关注政治文化的形成机制、政治哲学的规范性基础，以及历史政治学视角下国家与社会关系的演变。在方法论上，我兼顾量化分析与质性研究，尤其注重将实地调查与文献梳理相结合，致力于以严谨的学术态度探讨中国与比较政治的核心议题。我相信，真正的政治研究既需要扎根于历史脉络，也需要直面当代治理的现实问题。
+    </p>
+    <blockquote class="about-quote">
+      "政治学的使命，不仅在于理解权力，更在于追问正当性。"
+    </blockquote>
+  </section>
+
+  <!-- ===== 学术背景 ===== -->
+  <section id="education" class="fade-up">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">学术背景</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">🏛️</div>
+        <div class="info-card-label">就读院校</div>
+        <div class="info-card-value">华东政法大学<br>政府管理学院</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📖</div>
+        <div class="info-card-label">专业方向</div>
+        <div class="info-card-value">政治学与行政学</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🎓</div>
+        <div class="info-card-label">学位信息</div>
+        <div class="info-card-value">法学学士<br>Bachelor of Law</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📍</div>
+        <div class="info-card-label">所在城市</div>
+        <div class="info-card-value">上海，中国</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 研究方向 ===== -->
+  <section id="research" class="fade-up">
+    <p class="section-label">Research Interests</p>
+    <h2 class="section-title">研究方向</h2>
+    <p class="section-body">
+      我的研究兴趣聚焦于以下三个核心领域，尝试在规范理论与经验研究之间构建对话。
+    </p>
+    <div class="tag-row">
+      <span class="tag">🧭 政治文化</span>
+      <span class="tag">📜 政治哲学</span>
+      <span class="tag">🏺 历史政治学</span>
+      <span class="tag">⚖️ 国家与社会关系</span>
+      <span class="tag">🌐 比较政治</span>
+    </div>
+  </section>
+
+  <!-- ===== 技能 ===== -->
+  <section id="skills" class="fade-up">
+    <p class="section-label">Skills & Methods</p>
+    <h2 class="section-title">研究方法与技能</h2>
+    <div class="skill-list">
+      <div class="skill-item">
+        <span class="skill-name">Python</span>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width:82%; animation-delay:.1s"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">R 语言</span>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width:76%; animation-delay:.2s"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">SPSS</span>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width:70%; animation-delay:.3s"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">田野调查</span>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width:88%; animation-delay:.4s"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 课程 ===== -->
+  <section id="courses" class="fade-up">
+    <p class="section-label">Selected Coursework</p>
+    <h2 class="section-title">主修课程</h2>
+    <div class="course-grid">
+      <div class="course-card">
+        <span class="course-num">POLS · 01</span>
+        中西方政治思想
+      </div>
+      <div class="course-card">
+        <span class="course-num">POLS · 02</span>
+        中西方政治制度
+      </div>
+      <div class="course-card">
+        <span class="course-num">GOVT · 03</span>
+        国家政府与政治
+      </div>
+      <div class="course-card">
+        <span class="course-num">LAW · 04</span>
+        宪法与行政法
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <p>© 2025 李毅丰 &nbsp;·&nbsp; 华东政法大学政府管理学院</p>
+  <p style="margin-top:6px; font-size:11.5px; opacity:.7;">
+    Built with GitHub Pages &nbsp;·&nbsp; Designed with simplicity
+  </p>
+</footer>
+
+<!-- ===== 滚动淡入 JS ===== -->
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
+
